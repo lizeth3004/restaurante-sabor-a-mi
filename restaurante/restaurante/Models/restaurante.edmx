@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="restauranteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblCliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCliente" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="apellidoCliente" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="nroTipoDoc" Type="int" Nullable="false" />
+          <Property Name="idTipoDoc" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetallePlato' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblDetallePlato">
+          <Key>
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="precioPlato" />
+            <PropertyRef Name="total" />
+            <PropertyRef Name="idReserva" />
+            <PropertyRef Name="idPlato" />
+          </Key>
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="precioPlato" Type="int" Nullable="false" />
+          <Property Name="total" Type="int" Nullable="false" />
+          <Property Name="idReserva" Type="int" Nullable="false" />
+          <Property Name="idPlato" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetalleResarva' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblDetalleResarva">
+          <Key>
+            <PropertyRef Name="idReserva" />
+            <PropertyRef Name="idMesa" />
+          </Key>
+          <Property Name="idReserva" Type="int" Nullable="false" />
+          <Property Name="idMesa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMesa">
+          <Key>
+            <PropertyRef Name="idMesa" />
+          </Key>
+          <Property Name="idMesa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nroMesa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPlato">
+          <Key>
+            <PropertyRef Name="idPlato" />
+          </Key>
+          <Property Name="idPlato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombrePlato" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="precioPlato" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblReserva">
+          <Key>
+            <PropertyRef Name="idReserva" />
+          </Key>
+          <Property Name="idReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTipoDoc">
+          <Key>
+            <PropertyRef Name="idTipoDoc" />
+          </Key>
+          <Property Name="idTipoDoc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreTipoDoc" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_cliente_idTipoDoc">
+          <End Role="tblTipoDoc" Type="Self.tblTipoDoc" Multiplicity="1" />
+          <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoDoc">
+              <PropertyRef Name="idTipoDoc" />
+            </Principal>
+            <Dependent Role="tblCliente">
+              <PropertyRef Name="idTipoDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePlati_idPlato">
+          <End Role="tblPlato" Type="Self.tblPlato" Multiplicity="1" />
+          <End Role="tblDetallePlato" Type="Self.tblDetallePlato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPlato">
+              <PropertyRef Name="idPlato" />
+            </Principal>
+            <Dependent Role="tblDetallePlato">
+              <PropertyRef Name="idPlato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePlato_idReserva">
+          <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="1" />
+          <End Role="tblDetallePlato" Type="Self.tblDetallePlato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblReserva">
+              <PropertyRef Name="idReserva" />
+            </Principal>
+            <Dependent Role="tblDetallePlato">
+              <PropertyRef Name="idReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleReserva_idMesa">
+          <End Role="tblMesa" Type="Self.tblMesa" Multiplicity="1" />
+          <End Role="tblDetalleResarva" Type="Self.tblDetalleResarva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMesa">
+              <PropertyRef Name="idMesa" />
+            </Principal>
+            <Dependent Role="tblDetalleResarva">
+              <PropertyRef Name="idMesa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleReserva_idReserva">
+          <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="1" />
+          <End Role="tblDetalleResarva" Type="Self.tblDetalleResarva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblReserva">
+              <PropertyRef Name="idReserva" />
+            </Principal>
+            <Dependent Role="tblDetalleResarva">
+              <PropertyRef Name="idReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserva_idCliente">
+          <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+          <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="tblReserva">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="restauranteModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCliente" EntityType="Self.tblCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMesa" EntityType="Self.tblMesa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPlato" EntityType="Self.tblPlato" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReserva" EntityType="Self.tblReserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTipoDoc" EntityType="Self.tblTipoDoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDetallePlato" EntityType="Self.tblDetallePlato" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblDetallePlato].[cantidad] AS [cantidad], 
+    [tblDetallePlato].[precioPlato] AS [precioPlato], 
+    [tblDetallePlato].[total] AS [total], 
+    [tblDetallePlato].[idReserva] AS [idReserva], 
+    [tblDetallePlato].[idPlato] AS [idPlato]
+    FROM [dbo].[tblDetallePlato] AS [tblDetallePlato]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblDetalleResarva" EntityType="Self.tblDetalleResarva" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblDetalleResarva].[idReserva] AS [idReserva], 
+    [tblDetalleResarva].[idMesa] AS [idMesa]
+    FROM [dbo].[tblDetalleResarva] AS [tblDetalleResarva]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_cliente_idTipoDoc" Association="Self.FK_cliente_idTipoDoc">
+            <End Role="tblTipoDoc" EntitySet="tblTipoDoc" />
+            <End Role="tblCliente" EntitySet="tblCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePlati_idPlato" Association="Self.FK_DetallePlati_idPlato">
+            <End Role="tblPlato" EntitySet="tblPlato" />
+            <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePlato_idReserva" Association="Self.FK_DetallePlato_idReserva">
+            <End Role="tblReserva" EntitySet="tblReserva" />
+            <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleReserva_idMesa" Association="Self.FK_DetalleReserva_idMesa">
+            <End Role="tblMesa" EntitySet="tblMesa" />
+            <End Role="tblDetalleResarva" EntitySet="tblDetalleResarva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleReserva_idReserva" Association="Self.FK_DetalleReserva_idReserva">
+            <End Role="tblReserva" EntitySet="tblReserva" />
+            <End Role="tblDetalleResarva" EntitySet="tblDetalleResarva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserva_idCliente" Association="Self.FK_reserva_idCliente">
+            <End Role="tblCliente" EntitySet="tblCliente" />
+            <End Role="tblReserva" EntitySet="tblReserva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="restauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblCliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCliente" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidoCliente" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nroTipoDoc" Type="Int32" Nullable="false" />
+          <Property Name="idTipoDoc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblTipoDoc" Relationship="Self.FK_cliente_idTipoDoc" FromRole="tblCliente" ToRole="tblTipoDoc" />
+          <NavigationProperty Name="tblReserva" Relationship="Self.FK_reserva_idCliente" FromRole="tblCliente" ToRole="tblReserva" />
+        </EntityType>
+        <EntityType Name="tblMesa">
+          <Key>
+            <PropertyRef Name="idMesa" />
+          </Key>
+          <Property Name="idMesa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nroMesa" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblReserva" Relationship="Self.tblDetalleResarva" FromRole="tblMesa" ToRole="tblReserva" />
+        </EntityType>
+        <EntityType Name="tblPlato">
+          <Key>
+            <PropertyRef Name="idPlato" />
+          </Key>
+          <Property Name="idPlato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombrePlato" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precioPlato" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblDetallePlato" Relationship="Self.FK_DetallePlati_idPlato" FromRole="tblPlato" ToRole="tblDetallePlato" />
+        </EntityType>
+        <EntityType Name="tblReserva">
+          <Key>
+            <PropertyRef Name="idReserva" />
+          </Key>
+          <Property Name="idReserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblCliente" Relationship="Self.FK_reserva_idCliente" FromRole="tblReserva" ToRole="tblCliente" />
+          <NavigationProperty Name="tblDetallePlato" Relationship="Self.FK_DetallePlato_idReserva" FromRole="tblReserva" ToRole="tblDetallePlato" />
+          <NavigationProperty Name="tblMesa" Relationship="Self.tblDetalleResarva" FromRole="tblReserva" ToRole="tblMesa" />
+        </EntityType>
+        <EntityType Name="tblTipoDoc">
+          <Key>
+            <PropertyRef Name="idTipoDoc" />
+          </Key>
+          <Property Name="idTipoDoc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreTipoDoc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblCliente" Relationship="Self.FK_cliente_idTipoDoc" FromRole="tblTipoDoc" ToRole="tblCliente" />
+        </EntityType>
+        <EntityType Name="tblDetallePlato">
+          <Key>
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="precioPlato" />
+            <PropertyRef Name="total" />
+            <PropertyRef Name="idReserva" />
+            <PropertyRef Name="idPlato" />
+          </Key>
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="precioPlato" Type="Int32" Nullable="false" />
+          <Property Name="total" Type="Int32" Nullable="false" />
+          <Property Name="idReserva" Type="Int32" Nullable="false" />
+          <Property Name="idPlato" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblPlato" Relationship="Self.FK_DetallePlati_idPlato" FromRole="tblDetallePlato" ToRole="tblPlato" />
+          <NavigationProperty Name="tblReserva" Relationship="Self.FK_DetallePlato_idReserva" FromRole="tblDetallePlato" ToRole="tblReserva" />
+        </EntityType>
+        <Association Name="FK_cliente_idTipoDoc">
+          <End Role="tblTipoDoc" Type="Self.tblTipoDoc" Multiplicity="1" />
+          <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoDoc">
+              <PropertyRef Name="idTipoDoc" />
+            </Principal>
+            <Dependent Role="tblCliente">
+              <PropertyRef Name="idTipoDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserva_idCliente">
+          <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+          <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="tblReserva">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePlati_idPlato">
+          <End Role="tblPlato" Type="Self.tblPlato" Multiplicity="1" />
+          <End Role="tblDetallePlato" Type="Self.tblDetallePlato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPlato">
+              <PropertyRef Name="idPlato" />
+            </Principal>
+            <Dependent Role="tblDetallePlato">
+              <PropertyRef Name="idPlato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePlato_idReserva">
+          <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="1" />
+          <End Role="tblDetallePlato" Type="Self.tblDetallePlato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblReserva">
+              <PropertyRef Name="idReserva" />
+            </Principal>
+            <Dependent Role="tblDetallePlato">
+              <PropertyRef Name="idReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblDetalleResarva">
+          <End Role="tblMesa" Type="Self.tblMesa" Multiplicity="*" />
+          <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="restauranteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tblCliente" EntityType="Self.tblCliente" />
+          <EntitySet Name="tblMesa" EntityType="Self.tblMesa" />
+          <EntitySet Name="tblPlato" EntityType="Self.tblPlato" />
+          <EntitySet Name="tblReserva" EntityType="Self.tblReserva" />
+          <EntitySet Name="tblTipoDoc" EntityType="Self.tblTipoDoc" />
+          <EntitySet Name="tblDetallePlato" EntityType="Self.tblDetallePlato" />
+          <AssociationSet Name="FK_cliente_idTipoDoc" Association="Self.FK_cliente_idTipoDoc">
+            <End Role="tblTipoDoc" EntitySet="tblTipoDoc" />
+            <End Role="tblCliente" EntitySet="tblCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserva_idCliente" Association="Self.FK_reserva_idCliente">
+            <End Role="tblCliente" EntitySet="tblCliente" />
+            <End Role="tblReserva" EntitySet="tblReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePlati_idPlato" Association="Self.FK_DetallePlati_idPlato">
+            <End Role="tblPlato" EntitySet="tblPlato" />
+            <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePlato_idReserva" Association="Self.FK_DetallePlato_idReserva">
+            <End Role="tblReserva" EntitySet="tblReserva" />
+            <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
+          </AssociationSet>
+          <AssociationSet Name="tblDetalleResarva" Association="Self.tblDetalleResarva">
+            <End Role="tblMesa" EntitySet="tblMesa" />
+            <End Role="tblReserva" EntitySet="tblReserva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="restauranteModelStoreContainer" CdmEntityContainer="restauranteEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="restauranteModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCliente">
+            <EntityTypeMapping TypeName="restauranteModel.tblCliente">
+              <MappingFragment StoreEntitySet="tblCliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+                <ScalarProperty Name="apellidoCliente" ColumnName="apellidoCliente" />
+                <ScalarProperty Name="nroTipoDoc" ColumnName="nroTipoDoc" />
+                <ScalarProperty Name="idTipoDoc" ColumnName="idTipoDoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMesa">
+            <EntityTypeMapping TypeName="restauranteModel.tblMesa">
+              <MappingFragment StoreEntitySet="tblMesa">
+                <ScalarProperty Name="idMesa" ColumnName="idMesa" />
+                <ScalarProperty Name="nroMesa" ColumnName="nroMesa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPlato">
+            <EntityTypeMapping TypeName="restauranteModel.tblPlato">
+              <MappingFragment StoreEntitySet="tblPlato">
+                <ScalarProperty Name="idPlato" ColumnName="idPlato" />
+                <ScalarProperty Name="nombrePlato" ColumnName="nombrePlato" />
+                <ScalarProperty Name="precioPlato" ColumnName="precioPlato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReserva">
+            <EntityTypeMapping TypeName="restauranteModel.tblReserva">
+              <MappingFragment StoreEntitySet="tblReserva">
+                <ScalarProperty Name="idReserva" ColumnName="idReserva" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTipoDoc">
+            <EntityTypeMapping TypeName="restauranteModel.tblTipoDoc">
+              <MappingFragment StoreEntitySet="tblTipoDoc">
+                <ScalarProperty Name="idTipoDoc" ColumnName="idTipoDoc" />
+                <ScalarProperty Name="nombreTipoDoc" ColumnName="nombreTipoDoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDetallePlato">
+            <EntityTypeMapping TypeName="restauranteModel.tblDetallePlato">
+              <MappingFragment StoreEntitySet="tblDetallePlato">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precioPlato" ColumnName="precioPlato" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="idReserva" ColumnName="idReserva" />
+                <ScalarProperty Name="idPlato" ColumnName="idPlato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tblDetalleResarva" TypeName="restauranteModel.tblDetalleResarva" StoreEntitySet="tblDetalleResarva">
+            <EndProperty Name="tblMesa">
+              <ScalarProperty Name="idMesa" ColumnName="idMesa" />
+            </EndProperty>
+            <EndProperty Name="tblReserva">
+              <ScalarProperty Name="idReserva" ColumnName="idReserva" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

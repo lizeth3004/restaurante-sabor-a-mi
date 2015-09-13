@@ -1,0 +1,130 @@
+CREANDO LAS TABLAS 
+----------------------
+create table tblTipoDoc(
+idTipoDoc INT identity (1,1) not null primary key,
+nombreTipoDoc VARCHAR(45) not null
+)
+go
+
+create table tblMesa(
+idMesa INT identity (1,1) not null primary key,
+nroMesa INT not null
+)
+go
+
+create table tblPlato(
+idPlato INT identity (1,1) not null primary key,
+nombrePlato VARCHAR(45) not null,
+precioPlato INT not null
+)
+go
+
+create table tblCliente(
+idCliente INT identity(1,1) NOT NULL primary key, 
+nombreCliente VARCHAR(45) NOT NULL,
+apellidoCliente VARCHAR(45) NOT NULL,
+nroTipoDoc INT NOT NULL,
+idTipoDoc INT NOT NULL,
+constraint FK_cliente_idTipoDoc foreign key (idTipoDoc) references tblTipoDoc(idTipoDoc)
+)
+go
+
+create table tblReserva(
+idReserva INT identity(1,1) not null primary key,
+fecha DATE not null,
+idCliente INT not null,
+constraint FK_reserva_idCliente foreign key (idCliente) references tblCliente(idCliente)
+)
+go
+
+create table tblDetalleResarva(
+idReserva INT not null,
+idMesa INT not null,
+constraint FK_DetalleReserva_idReserva foreign key (idReserva) references tblReserva(idReserva),
+constraint FK_DetalleReserva_idMesa foreign key (idMesa) references tblMesa(idMesa)
+)
+go
+
+create table tblDetallePlato(
+cantidad INT not null,
+precioPlato INT not null,
+total INT not null,
+idReserva INT not null,
+idPlato INT not null,
+constraint FK_DetallePlato_idReserva foreign key (idReserva) references tblReserva(idReserva),
+constraint FK_DetallePlati_idPlato foreign key (idPlato) references tblPlato(idPlato)
+)
+go
+
+LLENANDO LAS TABLAS 
+----------------------
+insert into tblTipoDoc values
+
+('Tarjeta de identidad'),
+
+('Cedula'),
+
+('Pasaporte'),
+
+('Registro civil');
+
+
+select * from tblTipoDoc
+
+
+
+insert into tblCliente values
+
+('Alejandro', 'Sanchez', 123456, 1),
+
+('Julian', 'Arboleda', 103587, 2),
+
+('Manuela', 'Perez', 980650, 1),
+
+('Carlos', 'Morales', 584622, 3),
+
+('Camila', 'Florez', 942560, 1);
+
+
+select * from tblCliente
+
+
+
+insert into tblMesa values
+
+(10),
+
+(15),
+
+(20),
+
+(25),
+
+(30),
+
+(35),
+
+(40);
+
+
+select * from tblMesa
+
+
+
+insert into tblPlato values 
+
+('Arroz con pollo', 15000),
+
+('Espaguetis a la boloñesa', 25000),
+
+('Fresco', 1500),
+('Gaseosa', 2000),
+
+('Frijoles', 8000),
+
+('Caldo de pescado', 11000),
+
+('Carne', 4000);
+
+
+select * from tblPlato
