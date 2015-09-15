@@ -23,24 +23,18 @@ namespace restaurante.Controllers
             var listMesa = new SelectList(varMesa, "idMesa", "nroMesa");
             ViewData["Mesa"] = listMesa;
 
-            //var varPlato = (from td in entidad.tblPlato
-            //               select td).ToList();
-            //var listPlato = new SelectList(varPlato, "idPlato", "nombrePlato");
-            //ViewData["Plato"] = listPlato;
+            var varPlato = (from td in entidad.tblPlato
+                            select td).ToList();
+            var listPlato = new SelectList(varPlato, "idPlato", "nombrePlato");
+            ViewData["Plato"] = listPlato;
+
+
+            //grid view
+            //var platos = new List<tblPlato>();
+            //platos = entidad.tblPlato.ToList();
 
             return View();
             
         }
-
-        public ActionResult listarPlato()
-        {
-            var varPlato = (from td in entidad.tblPlato
-                           select td);
-            //var listPlato = new SelectList(varPlato, "idPlato", "nombrePlato");
-            //ViewData["Plato"] = listPlato;
-
-            return View(varPlato.ToList());
-        }
-        
     }
 }

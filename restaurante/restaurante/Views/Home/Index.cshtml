@@ -1,7 +1,11 @@
 ﻿@using restaurante.Controllers;
 @using restaurante.Models;
+@model List<restaurante.Models.tblPlato>
 @{
     ViewBag.Title = "Home";
+    //grid view
+    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
 }
 
 <!DOCTYPE html>
@@ -102,16 +106,24 @@
 
             <div>
                 @Html.DropDownList("Plato:", ViewData["Plato"] as SelectList)
-            </div>
-            
-            
-            <table>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(listarPlato => listarPlato.)
-                    </th>
-                </tr>
-            </table>          
+            </div>          
+
+            @*grid view*@
+            @*<div>
+                @grid.GetHtml(
+         //tableStyle: "",
+         //headerStyle:"",
+         //footerStyle:"",
+         //alternatingRowStyle:"",
+         //rowStyle:"",
+         columns: grid.Columns(
+             grid.Column(columnName: "idPlato", header: "idPlato"),
+             grid.Column(columnName: "nombrePlato", header: "nombrePlato"),
+             grid.Column(columnName: "precio", header: "precio")
+             ))
+
+            </div>*@  
+                   
         </form>
 
     </div>
