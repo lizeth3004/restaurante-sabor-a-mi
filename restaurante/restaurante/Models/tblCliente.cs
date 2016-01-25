@@ -17,7 +17,7 @@ namespace restaurante.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblCliente()
         {
-            this.tblReserva = new HashSet<tblReserva>();
+            this.tblDetallePlato = new HashSet<tblDetallePlato>();
         }
     
         public int idCliente { get; set; }
@@ -28,6 +28,6 @@ namespace restaurante.Models
     
         public virtual tblTipoDoc tblTipoDoc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblReserva> tblReserva { get; set; }
+        public virtual ICollection<tblDetallePlato> tblDetallePlato { get; set; }
     }
 }

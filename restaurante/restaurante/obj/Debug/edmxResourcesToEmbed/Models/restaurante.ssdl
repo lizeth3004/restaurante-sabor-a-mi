@@ -24,27 +24,15 @@
 advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetallePlato' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="tblDetallePlato">
     <Key>
-      <PropertyRef Name="cantidad" />
-      <PropertyRef Name="precioPlato" />
-      <PropertyRef Name="total" />
-      <PropertyRef Name="idReserva" />
       <PropertyRef Name="idPlato" />
-    </Key>
-    <Property Name="cantidad" Type="int" Nullable="false" />
-    <Property Name="precioPlato" Type="int" Nullable="false" />
-    <Property Name="total" Type="int" Nullable="false" />
-    <Property Name="idReserva" Type="int" Nullable="false" />
-    <Property Name="idPlato" Type="int" Nullable="false" />
-  </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetalleResarva' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <EntityType Name="tblDetalleResarva">
-    <Key>
-      <PropertyRef Name="idReserva" />
+      <PropertyRef Name="idCliente" />
       <PropertyRef Name="idMesa" />
     </Key>
-    <Property Name="idReserva" Type="int" Nullable="false" />
+    <Property Name="idPlato" Type="int" Nullable="false" />
+    <Property Name="idCliente" Type="int" Nullable="false" />
     <Property Name="idMesa" Type="int" Nullable="false" />
+    <Property Name="cantidad" Type="int" />
+    <Property Name="total" Type="int" />
   </EntityType>
   <EntityType Name="tblMesa">
     <Key>
@@ -60,14 +48,6 @@ advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetalleResarva' no tiene 
     <Property Name="idPlato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombrePlato" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="precioPlato" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="tblReserva">
-    <Key>
-      <PropertyRef Name="idReserva" />
-    </Key>
-    <Property Name="idReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="fecha" Type="date" Nullable="false" />
-    <Property Name="idCliente" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tblTipoDoc">
     <Key>
@@ -88,7 +68,31 @@ advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetalleResarva' no tiene 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetallePlati_idPlato">
+  <Association Name="FK_tblCliente_idCliente">
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+    <End Role="tblDetallePlato" Type="Self.tblDetallePlato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCliente">
+        <PropertyRef Name="idCliente" />
+      </Principal>
+      <Dependent Role="tblDetallePlato">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMesa_idMesa">
+    <End Role="tblMesa" Type="Self.tblMesa" Multiplicity="1" />
+    <End Role="tblDetallePlato" Type="Self.tblDetallePlato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMesa">
+        <PropertyRef Name="idMesa" />
+      </Principal>
+      <Dependent Role="tblDetallePlato">
+        <PropertyRef Name="idMesa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPlato_idPlato">
     <End Role="tblPlato" Type="Self.tblPlato" Multiplicity="1" />
     <End Role="tblDetallePlato" Type="Self.tblDetallePlato" Multiplicity="*" />
     <ReferentialConstraint>
@@ -100,99 +104,67 @@ advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetalleResarva' no tiene 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetallePlato_idReserva">
-    <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="1" />
-    <End Role="tblDetallePlato" Type="Self.tblDetallePlato" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblReserva">
-        <PropertyRef Name="idReserva" />
-      </Principal>
-      <Dependent Role="tblDetallePlato">
-        <PropertyRef Name="idReserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleReserva_idMesa">
-    <End Role="tblMesa" Type="Self.tblMesa" Multiplicity="1" />
-    <End Role="tblDetalleResarva" Type="Self.tblDetalleResarva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblMesa">
-        <PropertyRef Name="idMesa" />
-      </Principal>
-      <Dependent Role="tblDetalleResarva">
-        <PropertyRef Name="idMesa" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleReserva_idReserva">
-    <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="1" />
-    <End Role="tblDetalleResarva" Type="Self.tblDetalleResarva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblReserva">
-        <PropertyRef Name="idReserva" />
-      </Principal>
-      <Dependent Role="tblDetalleResarva">
-        <PropertyRef Name="idReserva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_reserva_idCliente">
-    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
-    <End Role="tblReserva" Type="Self.tblReserva" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblCliente">
-        <PropertyRef Name="idCliente" />
-      </Principal>
-      <Dependent Role="tblReserva">
-        <PropertyRef Name="idCliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="restauranteModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblCliente" EntityType="Self.tblCliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblMesa" EntityType="Self.tblMesa" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPlato" EntityType="Self.tblPlato" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tblReserva" EntityType="Self.tblReserva" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTipoDoc" EntityType="Self.tblTipoDoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDetallePlato" EntityType="Self.tblDetallePlato" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
+    [tblDetallePlato].[idPlato] AS [idPlato], 
+    [tblDetallePlato].[idCliente] AS [idCliente], 
+    [tblDetallePlato].[idMesa] AS [idMesa], 
     [tblDetallePlato].[cantidad] AS [cantidad], 
-    [tblDetallePlato].[precioPlato] AS [precioPlato], 
-    [tblDetallePlato].[total] AS [total], 
-    [tblDetallePlato].[idReserva] AS [idReserva], 
-    [tblDetallePlato].[idPlato] AS [idPlato]
+    [tblDetallePlato].[total] AS [total]
     FROM [dbo].[tblDetallePlato] AS [tblDetallePlato]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="tblDetalleResarva" EntityType="Self.tblDetalleResarva" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblDetalleResarva].[idReserva] AS [idReserva], 
-    [tblDetalleResarva].[idMesa] AS [idMesa]
-    FROM [dbo].[tblDetalleResarva] AS [tblDetalleResarva]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_cliente_idTipoDoc" Association="Self.FK_cliente_idTipoDoc">
       <End Role="tblTipoDoc" EntitySet="tblTipoDoc" />
       <End Role="tblCliente" EntitySet="tblCliente" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetallePlati_idPlato" Association="Self.FK_DetallePlati_idPlato">
+    <AssociationSet Name="FK_tblCliente_idCliente" Association="Self.FK_tblCliente_idCliente">
+      <End Role="tblCliente" EntitySet="tblCliente" />
+      <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMesa_idMesa" Association="Self.FK_tblMesa_idMesa">
+      <End Role="tblMesa" EntitySet="tblMesa" />
+      <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPlato_idPlato" Association="Self.FK_tblPlato_idPlato">
       <End Role="tblPlato" EntitySet="tblPlato" />
       <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetallePlato_idReserva" Association="Self.FK_DetallePlato_idReserva">
-      <End Role="tblReserva" EntitySet="tblReserva" />
-      <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleReserva_idMesa" Association="Self.FK_DetalleReserva_idMesa">
-      <End Role="tblMesa" EntitySet="tblMesa" />
-      <End Role="tblDetalleResarva" EntitySet="tblDetalleResarva" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleReserva_idReserva" Association="Self.FK_DetalleReserva_idReserva">
-      <End Role="tblReserva" EntitySet="tblReserva" />
-      <End Role="tblDetalleResarva" EntitySet="tblDetalleResarva" />
-    </AssociationSet>
-    <AssociationSet Name="FK_reserva_idCliente" Association="Self.FK_reserva_idCliente">
-      <End Role="tblCliente" EntitySet="tblCliente" />
-      <End Role="tblReserva" EntitySet="tblReserva" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

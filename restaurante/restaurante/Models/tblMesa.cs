@@ -17,13 +17,13 @@ namespace restaurante.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblMesa()
         {
-            this.tblReserva = new HashSet<tblReserva>();
+            this.tblDetallePlato = new HashSet<tblDetallePlato>();
         }
     
         public int idMesa { get; set; }
         public int nroMesa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblReserva> tblReserva { get; set; }
+        public virtual ICollection<tblDetallePlato> tblDetallePlato { get; set; }
     }
 }

@@ -4,19 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0da4cc9582b448ef88d5682d24a99e39" Name="Diagram1">
-        <EntityTypeShape EntityType="restauranteModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+      <Diagram DiagramId="1fbe859db1f8444c94e75a803f05dd33" Name="Diagram1">
+        <EntityTypeShape EntityType="restauranteModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="restauranteModel.tblCliente" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="restauranteModel.tblMesa" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="restauranteModel.tblPlato" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="restauranteModel.tblReserva" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="restauranteModel.tblMesa" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="restauranteModel.tblPlato" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="restauranteModel.tblTipoDoc" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="restauranteModel.tblDetallePlato" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="restauranteModel.tblDetallePlato" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="restauranteModel.FK_cliente_idTipoDoc" ManuallyRouted="false" />
-        <AssociationConnector Association="restauranteModel.FK_reserva_idCliente" ManuallyRouted="false" />
-        <AssociationConnector Association="restauranteModel.FK_DetallePlati_idPlato" ManuallyRouted="false" />
-        <AssociationConnector Association="restauranteModel.FK_DetallePlato_idReserva" ManuallyRouted="false" />
-        <AssociationConnector Association="restauranteModel.tblDetalleResarva" ManuallyRouted="false" />
+        <AssociationConnector Association="restauranteModel.FK_tblCliente_idCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="restauranteModel.FK_tblMesa_idMesa" ManuallyRouted="false" />
+        <AssociationConnector Association="restauranteModel.FK_tblPlato_idPlato" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

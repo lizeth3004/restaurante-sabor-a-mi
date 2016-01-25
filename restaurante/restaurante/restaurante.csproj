@@ -127,7 +127,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\clsOrdenRealizada.cs" />
     <Compile Include="Models\restaurante.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -150,6 +153,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>restaurante.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>restaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>restaurante.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>restaurante.tt</DependentUpon>
     </Compile>
@@ -163,9 +172,6 @@
       <DependentUpon>restaurante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblPlato.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblReserva.cs">
       <DependentUpon>restaurante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblTipoDoc.cs">

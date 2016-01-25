@@ -14,13 +14,14 @@ namespace restaurante.Models
     
     public partial class tblDetallePlato
     {
-        public int cantidad { get; set; }
-        public int precioPlato { get; set; }
-        public int total { get; set; }
-        public int idReserva { get; set; }
         public int idPlato { get; set; }
+        public int idCliente { get; set; }
+        public int idMesa { get; set; }
+        public Nullable<int> cantidad { get; set; }
+        public Nullable<int> total { get; set; }
     
+        public virtual tblCliente tblCliente { get; set; }
+        public virtual tblMesa tblMesa { get; set; }
         public virtual tblPlato tblPlato { get; set; }
-        public virtual tblReserva tblReserva { get; set; }
     }
 }

@@ -40,15 +40,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblReserva">
-      <EntityTypeMapping TypeName="restauranteModel.tblReserva">
-        <MappingFragment StoreEntitySet="tblReserva">
-          <ScalarProperty Name="idReserva" ColumnName="idReserva" />
-          <ScalarProperty Name="fecha" ColumnName="fecha" />
-          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tblTipoDoc">
       <EntityTypeMapping TypeName="restauranteModel.tblTipoDoc">
         <MappingFragment StoreEntitySet="tblTipoDoc">
@@ -60,21 +51,37 @@
     <EntitySetMapping Name="tblDetallePlato">
       <EntityTypeMapping TypeName="restauranteModel.tblDetallePlato">
         <MappingFragment StoreEntitySet="tblDetallePlato">
-          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-          <ScalarProperty Name="precioPlato" ColumnName="precioPlato" />
-          <ScalarProperty Name="total" ColumnName="total" />
-          <ScalarProperty Name="idReserva" ColumnName="idReserva" />
           <ScalarProperty Name="idPlato" ColumnName="idPlato" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idMesa" ColumnName="idMesa" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="total" ColumnName="total" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="tblDetalleResarva" TypeName="restauranteModel.tblDetalleResarva" StoreEntitySet="tblDetalleResarva">
-      <EndProperty Name="tblMesa">
-        <ScalarProperty Name="idMesa" ColumnName="idMesa" />
-      </EndProperty>
-      <EndProperty Name="tblReserva">
-        <ScalarProperty Name="idReserva" ColumnName="idReserva" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="restauranteModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="restauranteModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="restauranteModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="restauranteModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="restauranteModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="restauranteModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="restauranteModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="restauranteModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="restauranteModel.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>
