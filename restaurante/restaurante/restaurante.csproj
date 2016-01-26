@@ -104,24 +104,24 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\restaurante.Context.tt">
+    <Content Include="Models\restautante.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>restaurante.edmx</DependentUpon>
-      <LastGenOutput>restaurante.Context.cs</LastGenOutput>
+      <DependentUpon>restautante.edmx</DependentUpon>
+      <LastGenOutput>restautante.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\restaurante.tt">
+    <Content Include="Models\restautante.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>restaurante.edmx</DependentUpon>
-      <LastGenOutput>restaurante.cs</LastGenOutput>
+      <DependentUpon>restautante.edmx</DependentUpon>
+      <LastGenOutput>restautante.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\restaurante.edmx">
+    <EntityDeploy Include="Models\restautante.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>restaurante.Designer.cs</LastGenOutput>
+      <LastGenOutput>restautante.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\restaurante.edmx.diagram">
-      <DependentUpon>restaurante.edmx</DependentUpon>
+    <Content Include="Models\restautante.edmx.diagram">
+      <DependentUpon>restautante.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -138,44 +138,44 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\clsOrdenRealizada.cs" />
-    <Compile Include="Models\restaurante.Context.cs">
+    <Compile Include="Models\restautante.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>restaurante.Context.tt</DependentUpon>
+      <DependentUpon>restautante.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\restaurante.cs">
+    <Compile Include="Models\restautante.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\restaurante.Designer.cs">
+    <Compile Include="Models\restautante.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>restaurante.edmx</DependentUpon>
+      <DependentUpon>restautante.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblCliente.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblDetallePlato.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblMesa.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblPlato.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblTipoDoc.cs">
-      <DependentUpon>restaurante.tt</DependentUpon>
+      <DependentUpon>restautante.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

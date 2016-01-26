@@ -21,104 +21,103 @@
     <title>Index</title>
 </head>
 <body>
-    <div>
         <h1>Restautante Sabor a mi MVC</h1>
-        <form>
-            <div>
+
                 <h2 style="color: green;">Orden</h2>
-                <div class="row">
-                    <div class="col-md-3 col-md-offset-1">
-                        <div class="from-group">
-                            <label for="tipoDoc">Tipo de documento</label>
-                            <div>
-                                @Html.DropDownList("Tipo de Documento:", ViewData["TipoDocumento"] as SelectList, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="nroTipoDoc">Numero de documento</label>
-                            <input type="text" class="form-control" name="txtnroTipoDoc" placeholder="Ingrese nro del documento" required>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="nombre">Nombre del cliente</label>
-                            <input type="text" class="form-control" name="txtnombre" placeholder="Ingrese el nombre" required>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-2 col-md-offset-1">
-                        <div class="form-group">
-                            <label for="apellido">Apellido del cliente</label>
-                            <input type="text" class="form-control" name="txtapellido" placeholder="Ingrese el apellido" required>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="nroMesa">Numero de la mesa</label>
-                            <div>
-                                @Html.DropDownList("Mesa:", ViewData["Mesa"] as SelectList, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="alimento">Alimento</label>
-                            <div>
-                                @Html.DropDownList("Plato:", ViewData["Plato"] as SelectList, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="cantidad">Cantidad</label>
-                            <input type="text" class="form-control" name="txtCantidad" placeholder="Ingrese la cantidad" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-offset-8">
-                    <button type="submit" name="btnRegistrar" class="btn btn-info">Registrar orden</button>
-                </div>
-
-                <h2 style="color: green;">Ordenes realizadas</h2>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-bordered table-striped table-responsive">
-                            <thead style="text-align:center;">
-                                <tr>
-                                    <td><b>Documento</b></td>
-                                    <td><b>Cliente</b></td>
-                                    <td><b>Número de mesa</b></td>
-                                    <td><b>Alimento</b></td>
-                                    <td><b>Precio</b></td>
-                                    <td><b>Cantidad</b></td>
-                                    <td><b>Total</b></td>
-                                </tr>
-                            </thead>
-                            <tbody style="text-align:center;">
-                                @foreach (var item in listaOrdenes)
-                                {
-                                    <tr>
-                                        <td>@item.documento</td>
-                                        <td>@item.cliente</td>
-                                        <td>@item.nroMesa</td>
-                                        <td>@item.nombrePlato</td>
-                                        <td>@item.precioPlato</td>
-                                        <td>@item.dpcantidad</td>
-                                        <td>@item.total</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+                <div class="from-group">
+                    <label for="idTipoDoc">Tipo de documento</label>
+                    <div>
+                        @Html.DropDownList("idTipoDoc", ViewData["TipoDocumento"] as SelectList, htmlAttributes: new { @class = "form-control" })
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="nroTipoDoc">Numero de documento</label>
+                    <input type="text" class="form-control" name="nroTipoDoc" placeholder="Ingrese nro del documento" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="nombreCliente">Nombre del cliente</label>
+                    <input type="text" class="form-control" name="nombreCliente" placeholder="Ingrese el nombre" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+                <div class="form-group">
+                    <label for="apellidoCliente">Apellido del cliente</label>
+                    <input type="text" class="form-control" name="apellidoCliente" placeholder="Ingrese el apellido" required>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="idMesa">Numero de la mesa</label>
+                    <div>
+                        @Html.DropDownList("idMesa", ViewData["Mesa"] as SelectList, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="idPlato">Alimento</label>
+                    <div>
+                        @Html.DropDownList("idPlato", ViewData["Plato"] as SelectList, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="text" class="form-control" name="cantidad" placeholder="Ingrese la cantidad" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-offset-8">
+            <button type="submit" class="btn btn-info">Registrar orden</button>
+        </div>
+    }
+
+    <h2 style="color: green;">Ordenes realizadas</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped table-responsive">
+                <thead style="text-align:center;">
+                    <tr>
+                        <td><b>Documento</b></td>
+                        <td><b>Cliente</b></td>
+                        <td><b>Número de mesa</b></td>
+                        <td><b>Alimento</b></td>
+                        <td><b>Precio</b></td>
+                        <td><b>Cantidad</b></td>
+                        <td><b>Total</b></td>
+                    </tr>
+                </thead>
+                <tbody style="text-align:center;">
+                    @foreach (var item in listaOrdenes)
+                    {
+                        <tr>
+                            <td>@item.documento</td>
+                            <td>@item.cliente</td>
+                            <td>@item.nroMesa</td>
+                            <td>@item.nombrePlato</td>
+                            <td>@item.precioPlato</td>
+                            <td>@item.dpcantidad</td>
+                            <td>@item.total</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

@@ -111,7 +111,17 @@ advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetallePlato' no tiene de
     <Parameter Name="nroTipoDoc" Type="int" Mode="In" />
     <Parameter Name="idTipoDoc" Type="int" Mode="In" />
   </Function>
+  <Function Name="orden" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idPlato" Type="int" Mode="In" />
+    <Parameter Name="idCliente" Type="int" Mode="In" />
+    <Parameter Name="idMesa" Type="int" Mode="In" />
+    <Parameter Name="cantidad" Type="int" Mode="In" />
+  </Function>
   <Function Name="realizarOrden" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombreCliente" Type="varchar" Mode="In" />
+    <Parameter Name="apellidoCliente" Type="varchar" Mode="In" />
+    <Parameter Name="nroTipoDoc" Type="int" Mode="In" />
+    <Parameter Name="idTipoDoc" Type="int" Mode="In" />
     <Parameter Name="idPlato" Type="int" Mode="In" />
     <Parameter Name="idMesa" Type="int" Mode="In" />
     <Parameter Name="cantidad" Type="int" Mode="In" />

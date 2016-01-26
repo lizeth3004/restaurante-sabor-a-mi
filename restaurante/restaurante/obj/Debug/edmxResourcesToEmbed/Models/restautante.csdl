@@ -139,7 +139,17 @@
       <Parameter Name="nroTipoDoc" Mode="In" Type="Int32" />
       <Parameter Name="idTipoDoc" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="orden">
+      <Parameter Name="idPlato" Mode="In" Type="Int32" />
+      <Parameter Name="idCliente" Mode="In" Type="Int32" />
+      <Parameter Name="idMesa" Mode="In" Type="Int32" />
+      <Parameter Name="cantidad" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="realizarOrden">
+      <Parameter Name="nombreCliente" Mode="In" Type="String" />
+      <Parameter Name="apellidoCliente" Mode="In" Type="String" />
+      <Parameter Name="nroTipoDoc" Mode="In" Type="Int32" />
+      <Parameter Name="idTipoDoc" Mode="In" Type="Int32" />
       <Parameter Name="idPlato" Mode="In" Type="Int32" />
       <Parameter Name="idMesa" Mode="In" Type="Int32" />
       <Parameter Name="cantidad" Mode="In" Type="Int32" />

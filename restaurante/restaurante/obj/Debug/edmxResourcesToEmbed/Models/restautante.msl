@@ -60,6 +60,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="insertarCliente" FunctionName="restauranteModel.Store.insertarCliente" />
+    <FunctionImportMapping FunctionImportName="orden" FunctionName="restauranteModel.Store.orden" />
     <FunctionImportMapping FunctionImportName="realizarOrden" FunctionName="restauranteModel.Store.realizarOrden" />
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="restauranteModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="restauranteModel.Store.sp_creatediagram" />

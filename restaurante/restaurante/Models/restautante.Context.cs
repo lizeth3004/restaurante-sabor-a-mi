@@ -34,6 +34,81 @@ namespace restaurante.Models
         public virtual DbSet<tblTipoDoc> tblTipoDoc { get; set; }
         public virtual DbSet<tblDetallePlato> tblDetallePlato { get; set; }
     
+        public virtual int insertarCliente(string nombreCliente, string apellidoCliente, Nullable<int> nroTipoDoc, Nullable<int> idTipoDoc)
+        {
+            var nombreClienteParameter = nombreCliente != null ?
+                new ObjectParameter("nombreCliente", nombreCliente) :
+                new ObjectParameter("nombreCliente", typeof(string));
+    
+            var apellidoClienteParameter = apellidoCliente != null ?
+                new ObjectParameter("apellidoCliente", apellidoCliente) :
+                new ObjectParameter("apellidoCliente", typeof(string));
+    
+            var nroTipoDocParameter = nroTipoDoc.HasValue ?
+                new ObjectParameter("nroTipoDoc", nroTipoDoc) :
+                new ObjectParameter("nroTipoDoc", typeof(int));
+    
+            var idTipoDocParameter = idTipoDoc.HasValue ?
+                new ObjectParameter("idTipoDoc", idTipoDoc) :
+                new ObjectParameter("idTipoDoc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarCliente", nombreClienteParameter, apellidoClienteParameter, nroTipoDocParameter, idTipoDocParameter);
+        }
+    
+        public virtual int orden(Nullable<int> idPlato, Nullable<int> idCliente, Nullable<int> idMesa, Nullable<int> cantidad)
+        {
+            var idPlatoParameter = idPlato.HasValue ?
+                new ObjectParameter("idPlato", idPlato) :
+                new ObjectParameter("idPlato", typeof(int));
+    
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            var idMesaParameter = idMesa.HasValue ?
+                new ObjectParameter("idMesa", idMesa) :
+                new ObjectParameter("idMesa", typeof(int));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("orden", idPlatoParameter, idClienteParameter, idMesaParameter, cantidadParameter);
+        }
+    
+        public virtual int realizarOrden(string nombreCliente, string apellidoCliente, Nullable<int> nroTipoDoc, Nullable<int> idTipoDoc, Nullable<int> idPlato, Nullable<int> idMesa, Nullable<int> cantidad)
+        {
+            var nombreClienteParameter = nombreCliente != null ?
+                new ObjectParameter("nombreCliente", nombreCliente) :
+                new ObjectParameter("nombreCliente", typeof(string));
+    
+            var apellidoClienteParameter = apellidoCliente != null ?
+                new ObjectParameter("apellidoCliente", apellidoCliente) :
+                new ObjectParameter("apellidoCliente", typeof(string));
+    
+            var nroTipoDocParameter = nroTipoDoc.HasValue ?
+                new ObjectParameter("nroTipoDoc", nroTipoDoc) :
+                new ObjectParameter("nroTipoDoc", typeof(int));
+    
+            var idTipoDocParameter = idTipoDoc.HasValue ?
+                new ObjectParameter("idTipoDoc", idTipoDoc) :
+                new ObjectParameter("idTipoDoc", typeof(int));
+    
+            var idPlatoParameter = idPlato.HasValue ?
+                new ObjectParameter("idPlato", idPlato) :
+                new ObjectParameter("idPlato", typeof(int));
+    
+            var idMesaParameter = idMesa.HasValue ?
+                new ObjectParameter("idMesa", idMesa) :
+                new ObjectParameter("idMesa", typeof(int));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("realizarOrden", nombreClienteParameter, apellidoClienteParameter, nroTipoDocParameter, idTipoDocParameter, idPlatoParameter, idMesaParameter, cantidadParameter);
+        }
+    
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?

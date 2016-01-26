@@ -36,7 +36,8 @@ namespace restaurante.Controllers
                                nombrePlato = p.nombrePlato,
                                precioPlato = p.precioPlato,
                                dpcantidad = dp.cantidad,
-                               total = p.precioPlato * dp.cantidad
+                               total = dp.total
+                               //total = p.precioPlato * dp.cantidad
                            }
                        ).ToArray();
 
@@ -49,8 +50,8 @@ namespace restaurante.Controllers
 
             return lista;
         }
-        
 
+        [HttpGet]
         public ActionResult Index()
         {
             var varTipoDoc = (from td in entidad.tblTipoDoc
@@ -72,6 +73,18 @@ namespace restaurante.Controllers
 
             return View();
             
+        }
+
+        [HttpPost]
+        public ActionResult Index(tblCliente cliente, tblPlato plato, tblMesa mesa, tblDetallePlato dtPlato)
+        {
+            // entidad.insertarCliente(cliente.nombreCliente, cliente.apellidoCliente, cliente.nroTipoDoc, cliente.idTipoDoc);
+
+            // entidad.realizarOrden(plato.idPlato, mesa.idMesa, dtPlato.cantidad);
+
+            entidad.realizarOrden(cliente.nombreCliente, cliente.apellidoCliente, cliente.nroTipoDoc, cliente.idTipoDoc, plato.idPlato, mesa.idMesa, dtPlato.cantidad);
+
+            return Redirect("/");
         }
     }
 }

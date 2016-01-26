@@ -110,6 +110,27 @@ advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetallePlato' no tiene de
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="insertarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombreCliente" Type="varchar" Mode="In" />
+          <Parameter Name="apellidoCliente" Type="varchar" Mode="In" />
+          <Parameter Name="nroTipoDoc" Type="int" Mode="In" />
+          <Parameter Name="idTipoDoc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="orden" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPlato" Type="int" Mode="In" />
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="idMesa" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="realizarOrden" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombreCliente" Type="varchar" Mode="In" />
+          <Parameter Name="apellidoCliente" Type="varchar" Mode="In" />
+          <Parameter Name="nroTipoDoc" Type="int" Mode="In" />
+          <Parameter Name="idTipoDoc" Type="int" Mode="In" />
+          <Parameter Name="idPlato" Type="int" Mode="In" />
+          <Parameter Name="idMesa" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -310,6 +331,27 @@ advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetallePlato' no tiene de
             <End Role="tblPlato" EntitySet="tblPlato" />
             <End Role="tblDetallePlato" EntitySet="tblDetallePlato" />
           </AssociationSet>
+          <FunctionImport Name="insertarCliente">
+            <Parameter Name="nombreCliente" Mode="In" Type="String" />
+            <Parameter Name="apellidoCliente" Mode="In" Type="String" />
+            <Parameter Name="nroTipoDoc" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoDoc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="orden">
+            <Parameter Name="idPlato" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="idMesa" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="realizarOrden">
+            <Parameter Name="nombreCliente" Mode="In" Type="String" />
+            <Parameter Name="apellidoCliente" Mode="In" Type="String" />
+            <Parameter Name="nroTipoDoc" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoDoc" Mode="In" Type="Int32" />
+            <Parameter Name="idPlato" Mode="In" Type="Int32" />
+            <Parameter Name="idMesa" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -416,6 +458,9 @@ advertencia 6002: La tabla o vista 'restaurante.dbo.tblDetallePlato' no tiene de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="insertarCliente" FunctionName="restauranteModel.Store.insertarCliente" />
+          <FunctionImportMapping FunctionImportName="orden" FunctionName="restauranteModel.Store.orden" />
+          <FunctionImportMapping FunctionImportName="realizarOrden" FunctionName="restauranteModel.Store.realizarOrden" />
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="restauranteModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="restauranteModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="restauranteModel.Store.sp_dropdiagram" />
